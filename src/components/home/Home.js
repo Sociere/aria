@@ -11,7 +11,7 @@ import More from '../navigation/more/More';
 import Promo from '../promo/Promo';
 
 import Discord from '../social/discord/Discord';
-import Facebook from '../social/facebook/Facebook';
+//import Facebook from '../social/facebook/Facebook';
 // import Twitter from '../social/twitter/Twitter';
 
 class Home extends React.Component {
@@ -43,7 +43,6 @@ class Home extends React.Component {
                         <h1>Server Status</h1>
                         <Status />
                         <Discord />
-                        <Facebook />
                     </div>
                 </main>
             </div>

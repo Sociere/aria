@@ -14,6 +14,9 @@ Config.exp_rate = 1;
 Config.meso_rate = 1;
 Config.drop_rate = 1;
 
+Config.OAuth_client = 1;
+Config.OAuth_secret = secret;
+
 Config.discord = {
     base_url: 'https://discordapp.com/widget',
     server_id: '204832571467628545',

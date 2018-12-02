@@ -42,7 +42,7 @@ class Rankingslist extends React.Component {
     }
 
     requestData(params) {
-        Axios.get('rankings' + this.getResource(params)).then(response => {
+        Axios.get('ranking' + this.getResource(params)).then(response => {
             console.log(response.data);
             this.setState({data: response.data});
         });
@@ -85,15 +85,12 @@ class Rankingslist extends React.Component {
             return <Loading />
         }
 
-        var base = (this.state.data.current - 1) * 5;
-        var rank = base;
-
         var isUsernameSearch = this.isRankingsType("search");
 
         return this.state.data.data.map(function(player) {
-            rank += 1;
+            var rank = player.rank;
             return (
-                <Player player={player} rank={isUsernameSearch ? null : rank} key={player.name} />
+                <Player player={player} rank={player.rank} key={player.name} />
             );
         });
     }

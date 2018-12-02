@@ -18,16 +18,15 @@ class Join extends React.Component {
         var form = new FormData(this.refs.form);
 
         Axios.post('join', form).then((response) => {
-            console.log(response.data);
+            console.log(response.data.error);
 
             if (response.data.success) {
                 console.log("Success");
-                this.props.openPopup("Welcome!", "Your account has been registered successfully. We're glad to have you on board!");
+                this.props.openPopup("You're nearly there!", "If you wish to log in on " + Config.server_name +  " or the " + Config.server_name +  " Community Forums you must first verify your account. A verification link has been sent to your e-mail adress.");
                 this.props.close();
             } else {
                 this.setState({error: response.data.error});
-
-                console.log(response.data.error);
+				        console.log(response.data.error);
                 console.log("Failure");
             }
         });
@@ -65,19 +64,15 @@ class Join extends React.Component {
                         <input className="text" name="email" type="email" />
                     </div>
                     <div>
-                        <label htmlFor="mapleid">MapleID</label>
-                        <input className="text" name="mapleid" type="text" />
-                    </div>
-                    <div>
                         <label htmlFor="password">Password</label>
                         <input className="password" name="password" type="password" />
                     </div>
                     <div>
-                        <label htmlFor="confirm">Confirm</label>
+                        <label htmlFor="confirm">Confirm Password</label>
                         <input className="confirm" name="password_confirmation" type="password" />
                     </div>
                     <div className="repatcha-container">
-                        <ReCAPTCHA className="recaptcha" ref="recaptcha" onChange={this.recaptchaOnChange} sitekey={Config.recaptcha_key} />
+                        <ReCAPTCHA className="recaptcha" ref="recaptcha" sitekey={Config.recaptcha_key} />
                     </div>
                     {alert}
                     <div>

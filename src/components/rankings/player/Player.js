@@ -1,36 +1,20 @@
 import React from 'react';
+import Config from '../../../Config';
 import Jobs from '../../../Jobs';
 
 class Player extends React.Component {
 
-    getGuild() {
-      if (this.props.player.guild_name) {
-          return this.props.player.guild_name;
-      }
-      return "No Guild";
-    }
-
     render() {
-        var items = [1002736, 32562, 20246, 1051111];
-        var skinId = 2000;
-        var hasElfEars = false;
-        
-        if (this.props.rank) {
-            var rank = (
-                <span className="rank">#{this.props.rank}</span>
-            );
-        }
-
         return (
             <section className="player">
                 <div className="avatar">
-                    <img src={"https://labs.maplestory.io/api/gms/latest/character/compact/" + skinId + "/" + items.join(',') + "/stand1?showears=" + hasElfEars} alt={this.props.player.name} />
+                    <img src={Config.base_url + "avatar/" + this.props.player.sCharacterName} alt={this.props.player.sCharacterName} />
                 </div>
-                <h2>{rank}{this.props.player.name}</h2>
-                <h3><span className="level">Level {this.props.player.level}</span> ({this.props.player.exp} exp)</h3>
-                <h3>{Jobs[this.props.player.job_id].name}</h3>
-                <h3>{this.props.player.fame} Fame</h3>
-                <h3 className="guild">{this.getGuild()}</h3>
+                <h2>{this.props.player.nOverallRank + ". "}{this.props.player.sCharacterName}</h2>
+                <h3><span className="level">Level {this.props.player.nLeven}</span> ({this.props.player.nExp64} exp)</h3>
+                <h3>{Jobs[this.props.player.nJob].name}</h3>
+                <h3>{this.props.player.nPop} Fame</h3>
+                <h3 className="guild">"No guild."</h3>
             </section>
         );
     }
