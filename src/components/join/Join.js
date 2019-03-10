@@ -14,19 +14,15 @@ class Join extends React.Component {
 
     register(event) {
         event.preventDefault();
-
         var form = new FormData(this.refs.form);
-
         Axios.post('join', form).then((response) => {
-            console.log(response.data.error);
-
             if (response.data.success) {
                 console.log("Success");
                 this.props.openPopup("You're nearly there!", "If you wish to log in on " + Config.server_name +  " or the " + Config.server_name +  " Community Forums you must first verify your account. A verification link has been sent to your e-mail adress.");
                 this.props.close();
             } else {
                 this.setState({error: response.data.error});
-				        console.log(response.data.error);
+				console.log(response.data.error);
                 console.log("Failure");
             }
         });
@@ -70,6 +66,18 @@ class Join extends React.Component {
                     <div>
                         <label htmlFor="confirm">Confirm Password</label>
                         <input className="confirm" name="password_confirmation" type="password" />
+                    </div>
+					<div>
+                        <label htmlFor="birthday">Date of birth</label>
+                        <input className="birthday" name="birthday" type="date" />
+                    </div>
+					<div>
+                        <label htmlFor="gender">Sex</label>
+                        <select className="gender" name="gender">
+						  <option value="male">Male</option>
+						  <option value="female">Female</option>
+						  <option value="undefined">Special</option>
+						</select>
                     </div>
                     <div className="repatcha-container">
                         <ReCAPTCHA className="recaptcha" ref="recaptcha" sitekey={Config.recaptcha_key} />

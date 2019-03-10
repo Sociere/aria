@@ -1,6 +1,5 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import Axios from 'axios';
 
 class Greeting extends React.Component {
 
@@ -10,15 +9,12 @@ class Greeting extends React.Component {
     }
 
     logout() {
-        console.log("Logging out...");
-        Axios.post('logout', this.props.status).then(response => {
-            console.log(response.data);
-            if (response.data.success) {
-                console.log("Successfully logged out.");
-                this.props.setLogin(response.data.data);
-            } else {
-                console.log("Error: " + response.data.error);
-            }
+		localStorage.removeItem('session', null);
+        this.props.setLogin({
+            logged_in: false,
+            username: "",
+            gm_level: 0,
+			token: ""
         });
     }
 
@@ -41,7 +37,7 @@ class Greeting extends React.Component {
         var adminPanel = this.getAdminPanel();
         return (
             <section className="greeting">
-                <span className="welcome">Welcome back, {this.props.status.username} ({this.props.status.mapleid})</span>
+                <span className="welcome">Welcome back, {this.props.status.username}.</span>
                 <ul className="options">
                     {adminPanel}
                     <li onClick={this.logout}>

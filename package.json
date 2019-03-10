@@ -8,7 +8,8 @@
         "react-async-script": "^0.9.1",
         "react-dom": "^16.1.1",
         "react-google-recaptcha": "^0.9.7",
-        "react-scripts": "1.0.17"
+        "react-scripts": "1.0.17",
+        "universal-cookie": "^3.0.7"
     },
     "devDependencies": {
         "node-sass": "^4.7.2",

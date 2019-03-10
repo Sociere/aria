@@ -39,18 +39,30 @@ class Post extends React.Component {
     }
 
     submitPost(data, self) {
-        console.log(data);
-        var id = self.props.match.params.id;
-        Axios.patch('post/' + id, data).then(response => {
-            console.log(response.data);
-            if (response.data.success) {
-                self.refs.modal.show("Success!", "You have successfully editted this post.");
-                console.log("Successfully editted post.");
-            } else {
-                self.refs.modal.show("Server Error", response.data.error);
-                console.log("Error: " + response.data.error);
-            }
-        });
+		if (localStorage.getItem('session')) {
+			var session = JSON.parse(localStorage.getItem('session'));
+			console.log(session);
+			var date = new Date();
+			if (date.getTime() >= session.session_expire) {
+				localStorage.setItem('session', null);
+				self.refs.modal.show("Authentication Error:", "Your session expired. Please refresh the page and login again.");
+			} else {
+				var id = self.props.match.params.id;
+				Axios.put('post/' + id, data, {"headers":{"Authorization":session.token}})
+				.then(response => {
+					if (response.data.success) {
+						self.refs.modal.show("Success!", "You have successfully editted this post.");
+					} else {
+						self.refs.modal.show("Server Error:", response.data.error);
+					}
+				}).catch(error => {
+					self.refs.modal.show("Server Error:", "An unknown error occured.");
+					console.log(error);
+				});
+			}
+		} else {
+			self.refs.modal.show("Authentication Error:", "You must be logged in to do this.");
+		}
     }
 
     getBody() {

@@ -14,7 +14,6 @@ class Login extends React.Component {
     login(event) {
         event.preventDefault();
         var form = new FormData(this.refs.form);
-		console.log(form);
 		var auth = {
 			"grant_type":"password",
 			"username":form.get("email"),
@@ -22,27 +21,27 @@ class Login extends React.Component {
 			"client_id":Config.OAuth_client,
 			"client_secret":Config.OAuth_secret
 		};
-		console.log(auth);
-		Axios.post('oauth/token', auth).then((response) => {
-			if (response.data.access_token) {
-				var token = "Bearer " + response.data.access_token;
-				Axios.post('login', {}, {"headers":{"Authorization":token}}).then((response) => {
-					if (response.data.success) {
-						console.log("Successful Login");
-						this.props.close();
-						response.data.data.token = token;
-						this.props.setLogin(response.data.data);
-					} else {
-						this.setState({error: response.data.error});
-						console.log("Failed to Login");
-						console.log(response.data.error);
-					}
-				});
-			} else {
-				this.setState({error: "The account details are incorrect."});
-                console.log("Failed to Login");
-                console.log(response.data.error);
-			}
+		Axios.post('oauth/token', auth).then(response => {
+			var token = "Bearer " + response.data.access_token;
+			var date = new Date();
+			var expire = date.getTime() + (response.data.expires_in * 1000);
+			Axios.get('user', {"headers":{"Authorization":token}}).then(user => {
+				var session = {
+					logged_in: true,
+					username: user.data.name,
+					gm_level: user.data.access_level,
+					token: token,
+					session_expire: expire
+				}
+				localStorage.setItem('session', JSON.stringify(session));
+				this.props.close();
+				this.props.setLogin(session);
+			}).catch(message => {
+				this.setState({error: "An error occured trying to read user details."});
+			});
+		}).catch(message => {
+			console.log(message);
+			this.setState({error: "Incorrect account credentials"});
 		});
     }
 

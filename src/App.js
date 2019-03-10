@@ -23,25 +23,35 @@ class App extends React.Component {
         super(props);
         Axios.defaults.baseURL = Config.base_url;
         this.setLogin = this.setLogin.bind(this);
+		
         this.state = {
             logged_in: false,
             username: "",
-            gm_level: 0
+            gm_level: 0,
+			token: ""
         };
     }
 
     componentDidMount() {
-        Axios.get("").then(response => {
-            console.log(response.data);
-            this.setState(response.data);
-        });
+		//Maintain sessions, unless expired.
+        if (localStorage.getItem('session')) {
+			var session = JSON.parse(localStorage.getItem('session'));
+			var date = new Date();
+			if (date.getTime() >= session.session_expire) {
+				localStorage.setItem('session', null);
+			} else {
+				this.setLogin(session);
+			}
+		}
     }
 
     setLogin(status) {
-        console.log("Setting new login status");
-        console.log(status);
         this.setState(status);
     }
+	
+	getLogin() {
+		return this.state;
+	}
 
     render() {
 

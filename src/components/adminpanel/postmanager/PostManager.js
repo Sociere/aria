@@ -34,25 +34,37 @@ class PostManager extends React.Component {
 
     reloadPosts() {
         Axios.get('news/all').then(response => {
-            console.log(response.data);
-            this.setState({posts: response.data});
+            console.log(response.data.data);
+            this.setState({posts: response.data.data});
         });
     }
 
     deletePost(id, self) {
-        console.log("Deleting post :" + id);
-        Axios.delete('post/' + id).then(response => {
-            console.log(response.data);
-            if (response.data.success) {
-                self.refs.modal.show("Success!", "You have successfully deleted the post.");
-                self.setState({status: statusCode.HIDE});
-                self.reloadPosts();
-                console.log("Successfully deleted post.");
-            } else {
-                self.refs.modal.show("Server Error", response.data.error);
-                console.log("Error: " + response.data.error);
-            }
-        });
+		if (localStorage.getItem('session')) {
+			var session = JSON.parse(localStorage.getItem('session'));
+			console.log(session);
+			var date = new Date();
+			if (date.getTime() >= session.session_expire) {
+				localStorage.setItem('session', null);
+				self.refs.modal.show("Authentication Error:", "Your session expired. Please refresh the page and login again.");
+			} else {
+				Axios.delete('post/' + id, {"headers":{"Authorization":session.token}})
+				.then(response => {
+					if (response.data.success) {
+						self.refs.modal.show("Success!", "You have successfully deleted the post.");
+						self.setState({status: statusCode.HIDE});
+						self.reloadPosts();
+					} else {
+						self.refs.modal.show("Server Error:", response.data.error);
+					}
+				}).catch(error => {
+					self.refs.modal.show("Server Error:", "An unknown error occured.");
+					console.log(error);
+				});
+			}
+		} else {
+			self.refs.modal.show("Authentication Error:", "You must be logged in to do this.");
+		}
     }
 
     openNewPost() {
@@ -77,19 +89,33 @@ class PostManager extends React.Component {
     }
 
     submitPost(data, self) {
-        console.log(data);
-        Axios.post('post', data).then(response => {
-            console.log(response.data);
-            if (response.data.success) {
-                self.refs.modal.show("Success!", "You have successfully created a new post.");
-                self.setState({status: statusCode.HIDE});
-                self.reloadPosts();
-                console.log("Successfully posted post.");
-            } else {
-                self.refs.modal.show("Server Error", response.data.error);
-                console.log("Error: " + response.data.error);
-            }
-        });
+		if (localStorage.getItem('session')) {
+			var session = JSON.parse(localStorage.getItem('session'));
+			console.log(session);
+			var date = new Date();
+			if (date.getTime() >= session.session_expire) {
+				localStorage.setItem('session', null);
+				self.refs.modal.show("Authentication Error:", "Your session expired. Please refresh the page and login again.");
+			} else {
+				Axios.post('post', data, {"headers":{"Authorization":session.token}}).then(response => {
+					console.log(response.data);
+					if (response.data.success) {
+						self.refs.modal.show("Success!", "You have successfully created a new post.");
+						self.setState({status: statusCode.HIDE});
+						self.reloadPosts();
+						console.log("Successfully posted post.");
+					} else {
+						self.refs.modal.show("Server Error:", response.data.error);
+						console.log("Error: " + response.data.error);
+					}
+				}).catch(error => {
+					self.refs.modal.show("Server Error:", "An unknown error occured.");
+					console.log(error);
+				});
+			}
+		} else {
+			self.refs.modal.show("Authentication Error:", "You must be logged in to do this.");
+		}
     }
 
     getBody() {
