@@ -30,6 +30,7 @@
     }
 
     h2 {
+		color: white;
         font-size: 1.5rem;
         font-family: $secondary-font;
         margin: 0.25rem 0;
@@ -38,6 +39,7 @@
     }
 
     .meta-data {
+		color: white;
         font-size: 0.8rem;
         font-family: $secondary-font;
         margin: 0.25rem 0 0.5rem;
@@ -59,6 +61,7 @@
     }
 
     .read-me {
+		color: white;
         position: absolute;
         bottom: 0.5rem;
         right: 1rem;
@@ -69,22 +72,23 @@
     }
 
     .content {
+		color: white;
         font-size: 0.9rem;
         font-family: $secondary-font;
     }
 
     .newslist-post {
         margin-bottom: 2rem;
-        border: solid 1px #cbd0ff;
-        background-color: #fcfbff;
+        border: solid 1px #242424;
+        background-color: #3c444f;
         position: relative;
         box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.1), 0 4px 14px 0 rgba(0, 0, 0, 0.1);
 
         &:hover {
-            background-color: #f6f7ff;
+            background-color: #363d47;
 
             h2, .read-me {
-                color: #384092;
+                color: #ff4c4c;
             }
         }
     }

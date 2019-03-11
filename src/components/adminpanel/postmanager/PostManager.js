@@ -44,8 +44,8 @@ class PostManager extends React.Component {
 			var session = JSON.parse(localStorage.getItem('session'));
 			console.log(session);
 			var date = new Date();
-			if (date.getTime() >= session.session_expire) {
-				localStorage.setItem('session', null);
+			if (session == null || date.getTime() >= session.session_expire) {
+				localStorage.removeItem('session');
 				self.refs.modal.show("Authentication Error:", "Your session expired. Please refresh the page and login again.");
 			} else {
 				Axios.delete('post/' + id, {"headers":{"Authorization":session.token}})
@@ -93,8 +93,8 @@ class PostManager extends React.Component {
 			var session = JSON.parse(localStorage.getItem('session'));
 			console.log(session);
 			var date = new Date();
-			if (date.getTime() >= session.session_expire) {
-				localStorage.setItem('session', null);
+			if (session == null || date.getTime() >= session.session_expire) {
+				localStorage.removeItem('session');
 				self.refs.modal.show("Authentication Error:", "Your session expired. Please refresh the page and login again.");
 			} else {
 				Axios.post('post', data, {"headers":{"Authorization":session.token}}).then(response => {

@@ -37,8 +37,8 @@ class App extends React.Component {
         if (localStorage.getItem('session')) {
 			var session = JSON.parse(localStorage.getItem('session'));
 			var date = new Date();
-			if (date.getTime() >= session.session_expire) {
-				localStorage.setItem('session', null);
+			if (session == null || date.getTime() >= session.session_expire) {
+				localStorage.removeItem('session');
 			} else {
 				this.setLogin(session);
 			}

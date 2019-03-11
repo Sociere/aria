@@ -15,23 +15,23 @@
         margin-right: 1rem;
         width: 40%;
         outline: none;
-        border: 1px solid #424caf;
+        border: 1px solid #ff4c4c;
 
         &:focus,
         &:hover {
-            box-shadow: 0 0 8px #424caf;
+            box-shadow: 0 0 8px #a63131;
         }
     }
 
     .submit {
         color: white;
         padding: 0.5rem 1.5rem;
-        background-color: #424caf;
+        background-color: #ff4c4c;
         border-radius: 0.25rem;
         border: solid 1px #333b8a;
 
         &:hover {
-            background-color: #333b8a;
+            background-color: #a63131;
         }
     }
 }

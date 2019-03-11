@@ -1,15 +1,16 @@
 @import "../../../stylesheets/Variables.scss";
 
 .more {
-    background-color: #c7d4ff;
+    background-color: #3c444f;
     border-radius: 0.25rem;
     margin-bottom: 2rem;
 
     &:hover {
-        background-color: #b0c3ff;
+        background-color: #363d47;
     }
 
     a {
+		color: white;
         display: block;
         padding: 1rem;
         text-align: center;

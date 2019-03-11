@@ -60,9 +60,10 @@ main {
     display: block;
     padding: 0 calc(50% - #{$half-body-width}) 3rem;
     font-family: $primary-font;
+	color:white;
     flex: 1 0 auto;
     padding-top: 2rem;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(36, 36, 36, 0.9);
 
     @media (max-width: $mobile) {
         width: 100% !important;

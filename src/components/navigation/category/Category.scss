@@ -6,24 +6,25 @@
 
     li {
         display: inline-block;
-        background-color: lightblue;
-        border: solid 1px #7dbfd4;
+        background-color: #ff4c4c;
+        border: solid 1px #a63131;
         border-radius: 4px;
         margin-right: 0.5rem;
         margin-bottom: 1rem;
         cursor: pointer;
 
         a {
+			color: white;
             display: block;
             padding: 0.5rem 1.25rem;
         }
 
         &:hover {
-            background-color: #7dbfd4;
+            background-color: #a63131;
         }
     }
 
     .active {
-        background-color: #7dbfd4;
+        background-color: #a63131;
     }
 }

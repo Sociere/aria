@@ -1,6 +1,6 @@
 @import "../../stylesheets/Variables.scss";
 
-$width: 20rem;
+$width: 35rem;
 
 .modal {
     position: fixed;
@@ -18,10 +18,10 @@ $width: 20rem;
         left: 50%;
         transform: translate(-50%, -50%);
         padding: 1rem;
-        background-color: #52b07f;
+        background-color: #3c444f;
         color: white;
         border-radius: 4px;
-        border: solid 2px #45946b;
+        border: solid 2px #242424;
         right: calc(50% - #{$width});
     }
 
@@ -32,10 +32,10 @@ $width: 20rem;
         border-radius: 0.25rem;
         padding: 0 0.3rem 0.1rem;
         cursor: pointer;
-        background-color: #45946b;
+        background-color: #3c444f;
 
         &:hover {
-            background-color: #39825c;
+            background-color: #242424;
         }
     }
 
@@ -53,7 +53,7 @@ $width: 20rem;
     .modal-ok-button {
         display: inline-block;
         text-transform: uppercase;
-        background-color: #45946b;
+        background-color: #3c444f;
         padding: 0.5rem 2rem;
         border-radius: 0.25rem;
         margin-top: 0.5rem;
@@ -61,7 +61,7 @@ $width: 20rem;
         cursor: pointer;
 
         &:hover {
-            background-color: #39825c;
+            background-color: #242424;
         }
     }
 }

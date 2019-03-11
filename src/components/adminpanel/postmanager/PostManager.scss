@@ -24,6 +24,7 @@
         }
 
         .title {
+			color: white;
             width: 70%;
             font-family: $secondary-font;
         }
@@ -38,17 +39,17 @@
 
         .delete {
             width: 10%;
-            color: red;
+            color: white;
             border: solid 1px red;
             border-radius: 0.25rem;
             font-size: 0.75rem;
             padding: 0.1rem;
             text-align: center;
             cursor: pointer;
+			background-color: #ff4c4c;
 
             &:hover {
-                background-color: red;
-                color: white;
+                background-color: #a63131;
             }
         }
     }

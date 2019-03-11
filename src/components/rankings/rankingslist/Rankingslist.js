@@ -170,6 +170,35 @@ class Rankingslist extends React.Component {
                         <optgroup label="Heroes">
                             <option value="aran">Aran</option>
                             <option value="evan">Evan</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="phantom">Phantom</option>
+                            <option value="luminous">Luminous</option>
+                            <option value="shade">Shade</option>
+                        </optgroup>
+                        <optgroup label="Resistance">
+                            <option value="mechanic">Mechanic</option>
+                            <option value="battle-mage">Battle Mage</option>
+                            <option value="wild-hunter">Wild Hunter</option>
+                            <option value="demon-avenger">Demon Avenger</option>
+                            <option value="demon-slayer">Demon Slayer</option>
+                            <option value="blaster">Blaster</option>
+                        </optgroup>
+                        <optgroup label="Sengoku">
+                            <option value="hayato">Hayato</option>
+                            <option value="kanna">Kanna</option>
+                        </optgroup>
+                        <optgroup label="Nova">
+                            <option value="kaiser">Kaiser</option>
+                            <option value="angelic-buster">Angelic Buster</option>
+                        </optgroup>
+                        <optgroup label="Transcendent">
+                            <option value="zero">Zero</option>
+                        </optgroup>
+                        <optgroup label="Anima">
+                            <option value="beast-tamer">Beast Tamer</option>
+                        </optgroup>
+                        <optgroup label="Special">
+                            <option value="pinkbean">Pink Bean</option>
                         </optgroup>
                     </select>
                     <Link className="submit" to={{pathname: '/rankings/job/' + this.state.job}}>Search</Link>

@@ -3,7 +3,8 @@
 .vote {
 
     .info {
-        color: #424caf;
+		font-size: 2em;
+        color: white;
     }
 
     .vote-link {
@@ -16,6 +17,7 @@
         }
 
         .description {
+			color: white;
             width: 70%;
             display: inline-block;
             text-align: center;

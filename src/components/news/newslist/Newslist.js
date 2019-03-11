@@ -90,7 +90,7 @@ class Newslist extends React.Component {
                 <NavLink to={"/post/" + post.id} key={post.id}>
                     <div className="newslist-post">
                         <div className="newslist-image">
-                            <img src="/images/background.png" alt="" />
+                            <img src="/images/update.png" alt="" />
                             <div className={"type " + post.type.toLowerCase()}>{post.type}</div>
                             <div className="views">{post.views} views</div>
                         </div>

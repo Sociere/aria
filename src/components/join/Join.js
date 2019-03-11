@@ -17,15 +17,16 @@ class Join extends React.Component {
         var form = new FormData(this.refs.form);
         Axios.post('join', form).then((response) => {
             if (response.data.success) {
-                console.log("Success");
-                this.props.openPopup("You're nearly there!", "If you wish to log in on " + Config.server_name +  " or the " + Config.server_name +  " Community Forums you must first verify your account. A verification link has been sent to your e-mail adress.");
+                this.props.openPopup("You're nearly there!", "If you wish to log in on " + Config.server_name +  " or the " + Config.server_name +  " Community Forums you must first verify your account. A verification link has been sent to your e-mail adress. Please note that in some cases the email may be marked as spam.");
                 this.props.close();
             } else {
                 this.setState({error: response.data.error});
 				console.log(response.data.error);
-                console.log("Failure");
             }
-        });
+        }).catch(error => {
+                this.props.openPopup("An unknown error has occured. Please refresh the page and try again.");
+                this.props.close();
+		});
     }
 
     recaptchaOnChange(value) {
